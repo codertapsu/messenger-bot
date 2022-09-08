@@ -24,7 +24,7 @@ authorize.get('/', (req, res) => {
 
   // Redirect users to this URI on successful login
   const redirectURISuccess = `${redirectURI}&authorization_code=${authCode}`;
-  res.redirect();
+  res.redirect(redirectURISuccess);
   // res.render('authorize', {
   //   accountLinkingToken: accountLinkingToken,
   //   redirectURI: redirectURI,

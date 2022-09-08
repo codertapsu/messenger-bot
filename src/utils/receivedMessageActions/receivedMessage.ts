@@ -1,3 +1,4 @@
+import globals from '../../bot/libs/globals';
 import {
   sendImageMessage,
   sendGifMessage,
@@ -29,7 +30,7 @@ import {
  * then we'll simply confirm that we've received the attachment.
  *
  */
-const receivedMessage = (event: MessagingEvent) => {
+const receivedMessage = async(event: MessagingEvent) => {
   const SERVER_URL = process.env.SERVER_URL;
   const senderID = event.sender.id;
   const recipientID = event.recipient.id;
@@ -56,8 +57,8 @@ const receivedMessage = (event: MessagingEvent) => {
   } else if (quickReply) {
     const quickReplyPayload = quickReply.payload;
     console.log('Quick reply for message %s with payload %s', messageId, quickReplyPayload);
-
-    sendTextMessage(senderID, 'Quick reply tapped');
+    const { response } = await globals.AgentInstance().response(quickReplyPayload, senderID);
+    sendTextMessage(senderID, response || 'Quick reply tapped');
     return;
   }
 
@@ -136,7 +137,8 @@ const receivedMessage = (event: MessagingEvent) => {
       }
 
       default: {
-        sendTextMessage(senderID, messageText);
+        const { response } = await globals.AgentInstance().response(messageText, senderID);
+        sendTextMessage(senderID, response);
       }
     }
   } else if (messageAttachments) {

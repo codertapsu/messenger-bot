@@ -12,4 +12,3 @@ export { sendTextMessage } from './sendTextMessage';
 export { sendTypingOff } from './sendTypingOff';
 export { sendTypingOn } from './sendTypingOn';
 export { sendVideoMessage } from './sendVideoMessage';
-

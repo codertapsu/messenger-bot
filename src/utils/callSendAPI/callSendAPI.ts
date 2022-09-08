@@ -19,6 +19,8 @@ const callSendAPI = async (messageData: MessageData) => {
     }
   } catch (error) {
     console.error('Failed calling Send API.');
+    console.log(error);
+    
   }
 };
 
